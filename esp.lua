@@ -149,7 +149,7 @@ function esp:init()
         esp.drawings[plr] = {
             boxfill = newDrawing('Square', {Thickness = 1, Transparency = .5, Filled = true});
             boxoutline = newDrawing('Square', {Thickness = 3});
-            box = newDrawing('Square', {Thickness = 1, Filled = false});
+            box = newDrawing('Square', {Thickness = 1});
             tracer = newDrawing('Line', {Thickness = 1});
             angle = newDrawing('Line', {Thickness = 1});
             arrow = newDrawing('Triangle', {Filled = true, ZIndex = 3});
