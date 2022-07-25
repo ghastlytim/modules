@@ -83,6 +83,9 @@ function esp:unload()
     for _,v in next, players:GetPlayers() do
         esp.remove(v);
     end
+    for _,v in next, workspace.Zombies.Mobs:GetChildren() do
+        esp.remove(v);
+    end
     for _,v in next, connections do
         v:Disconnect();
     end
@@ -204,7 +207,15 @@ function esp:init()
             esp.new(v);
         end
     end
+    
+    for _,v in next, workspace.Zombies.Mobs:GetChildren() do
+        if v ~= players.LocalPlayer and getgenv().npcesp == true then
+            esp.new(v);
+        end
+    end
 
+    table.insert(connections, workspace.Zombies.Mobs.ChildAdded:Connect(esp.new));
+    table.insert(connections, workspace.Zombies.Mobs.ChildRemoved:Connect(esp.remove));
     table.insert(connections, players.PlayerAdded:Connect(esp.new));
     table.insert(connections, players.PlayerRemoving:Connect(esp.remove));
     table.insert(connections,
