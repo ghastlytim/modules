@@ -8,6 +8,37 @@ local localPlayer = players.LocalPlayer;
 
 local espTextScale;
 
+local Camera = workspace.CurrentCamera
+local Players = game:GetService("Players")
+local GuiService = game:GetService("GuiService")
+
+local LocalPlayer = Players.LocalPlayer
+local Mouse = LocalPlayer:GetMouse()
+
+local GetChildren = game.GetChildren
+local WorldToScreen = Camera.WorldToScreenPoint
+local GetPartsObscuringTarget = Camera.GetPartsObscuringTarget
+local FindFirstChild = game.FindFirstChild
+local GuiInset = GuiService.GetGuiInset
+
+
+local function IsPlayerVisible(Player)
+    local PlayerCharacter = Player.Character
+    local LocalPlayerCharacter = LocalPlayer.Character
+    
+    if not (PlayerCharacter or LocalPlayerCharacter) then return end 
+    
+    local PlayerRoot = FindFirstChild(PlayerCharacter, "Head") or FindFirstChild(PlayerCharacter, "HumanoidRootPart")
+    
+    if not PlayerRoot then return end 
+    
+    local CastPoints, IgnoreList = {PlayerRoot.Position, LocalPlayerCharacter, PlayerCharacter}, {LocalPlayerCharacter, PlayerCharacter}
+    local ObscuringObjects = #GetPartsObscuringTarget(Camera, CastPoints, IgnoreList)
+    
+    return ((ObscuringObjects == 0 and true) or (ObscuringObjects > 0 and false))
+end
+
+
 local function newDrawing(class, props)
     local d = Drawing.new(class);
     for i,v in next, props or {} do
@@ -56,6 +87,7 @@ local esp = {
     targetcolor = Color3.new(1,.15,.15);
     chams = {false, Color3.new(0,0,1), Color3.new(0,0,0), .25, 0};
     box = {false, Color3.new(1,1,1)};
+    boxnotvis = {false, Color3.new(1,1,1)};
     boxfill = {false, Color3.new(.5,0,0), .25};
     arrow = {false, Color3.new(1,1,1)};
     angle = {false, Color3.new(1,1,1)};
@@ -301,7 +333,15 @@ function esp:init()
                         if esp.box[1] then
                             data.box.Size = size;
                             data.box.Position = pos;
-                            data.box.Color = targetColor or esp.box[2];
+                                     for _, Player in next, GetChildren(Players) do
+                                                  if Player == LocalPlayer then continue end
+                                        if esp.boxnotvis[1] and IsPlayerVisible(Player) then
+                              data.box.Color = targetColor or esp.boxnotvis[2];         
+                            else
+                              data.box.Color = targetColor or esp.box[2];
+                           end       
+                                     end
+                                 
                             
                             if esp.outline[1] then
                                 data.boxoutline.Position = pos;
