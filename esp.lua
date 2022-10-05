@@ -335,7 +335,7 @@ function esp:init()
                             data.box.Position = pos;
                                      for _, Player in next, GetChildren(Players) do
                                                   if Player == LocalPlayer then continue end
-                                        if esp.boxnotvis[1] and IsPlayerVisible(Player) then
+                                        if esp.boxnotvis[1] and onScreen and Player.Name and IsPlayerVisible(Player) then
                               data.box.Color = targetColor or esp.boxnotvis[2];         
                             else
                               data.box.Color = targetColor or esp.box[2];
