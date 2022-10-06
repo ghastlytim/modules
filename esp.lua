@@ -8,35 +8,6 @@ local localPlayer = players.LocalPlayer;
 
 local espTextScale;
 
-local Camera = workspace.CurrentCamera
-local Players = game:GetService("Players")
-local GuiService = game:GetService("GuiService")
-
-local LocalPlayer = Players.LocalPlayer
-local Mouse = LocalPlayer:GetMouse()
-
-local GetChildren = game.GetChildren
-local WorldToScreen = Camera.WorldToScreenPoint
-local GetPartsObscuringTarget = Camera.GetPartsObscuringTarget
-local FindFirstChild = game.FindFirstChild
-local GuiInset = GuiService.GetGuiInset
-
-
-local function IsPlayerVisible(Player)
-    local PlayerCharacter = Player.Character
-    local LocalPlayerCharacter = LocalPlayer.Character
-    
-    if not (PlayerCharacter or LocalPlayerCharacter) then return end 
-    
-    local PlayerRoot = FindFirstChild(PlayerCharacter, "Head") or FindFirstChild(PlayerCharacter, "HumanoidRootPart")
-    
-    if not PlayerRoot then return end 
-    
-    local CastPoints, IgnoreList = {PlayerRoot.Position, LocalPlayerCharacter, PlayerCharacter}, {LocalPlayerCharacter, PlayerCharacter}
-    local ObscuringObjects = #GetPartsObscuringTarget(Camera, CastPoints, IgnoreList)
-    
-    return ((ObscuringObjects == 0 and true) or (ObscuringObjects > 0 and false))
-end
 
 
 local function newDrawing(class, props)
@@ -333,13 +304,8 @@ function esp:init()
                         if esp.box[1] then
                             data.box.Size = size;
                             data.box.Position = pos;
-                                     for _, Player in next, GetChildren(Players) do
-                                                  if Player == LocalPlayer then continue end
-                                        if esp.boxnotvis[1] and onScreen and Player.Name and IsPlayerVisible(Player) then
-                              data.box.Color = targetColor or esp.boxnotvis[2];         
-                            else
-                              data.box.Color = targetColor or esp.box[2];
-                           end       
+                            data.box.Color = targetColor or esp.box[2];
+                               
                                      end
                                  
                             
