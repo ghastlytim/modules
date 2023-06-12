@@ -2511,7 +2511,7 @@ function Library:CreateWindow(WindowTitle)
     });
 
     InputService.InputBegan:Connect(function(Input, Processed)
-        if Input.KeyCode == Enum.KeyCode.RightControl or (Input.KeyCode == Enum.KeyCode.RightShift and (not Processed)) then
+        if (not Processed)) then
             Outer.Visible = not Outer.Visible;
             ModalElement.Modal = Outer.Visible;
 
