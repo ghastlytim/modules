@@ -2510,8 +2510,8 @@ function Library:CreateWindow(WindowTitle)
         Parent = ScreenGui;
     });
      
-     Outer.Visible = not Outer.Visible;
-      ModalElement.Modal = Outer.Visible;
+     Outer.Visible = true;
+      ModalElement.Modal = true;
    
     Window.Holder = Outer;
 
