@@ -1,7 +1,7 @@
 local httpService = game:GetService('HttpService')
 
 local SaveManager = {} do
-	SaveManager.Folder = 'SomaHook'
+	SaveManager.Folder = 'Habit'
 	SaveManager.Ignore = {}
 	SaveManager.Parser = {
 		Toggle = {
