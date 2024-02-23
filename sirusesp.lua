@@ -65,7 +65,7 @@ local espLibrary = {
         healthTextColor = Color3.new(1, 1, 1),
         distance = true,
         distanceTransparency = 1,
-        distanceSuffix = " Meters",
+        distanceSuffix = " Studs",
         distanceColor = Color3.new(1, 1, 1),
         tracers = false,
         tracerTransparency = 1,
@@ -507,7 +507,7 @@ function espLibrary:Load(renderValue)
                 objects.bottom.Size = self.options.fontSize;
                 objects.bottom.Transparency = self.options.distanceTransparency;
                 objects.bottom.Color = color or self.options.nameColor;
-                objects.bottom.Text = tostring(mathfloor((plr.Character.HumanoidRootPart.Position - v.Head.Position).Magnitude)) .. self.options.distanceSuffix;
+                objects.bottom.Text = tostring(round(distance)) .. self.options.distanceSuffix;
                 objects.bottom.Position = round(position + vector2New(size.X * 0.5, size.Y + 1));
 
                 objects.box.Visible = show and self.options.boxes;
