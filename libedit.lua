@@ -1,3 +1,8 @@
+if not memorystats then memorystats={} memorystats.cache=function(a)end memorystats.restore=function(a)end end
+for i,v in pairs(({"Internal","HttpCache","Instances","Signals","Script","PhysicsCollision","PhysicsParts","GraphicsSolidModels","GraphicsMeshParts","GraphicsParticles","GraphicsParts","GraphicsSpatialHash","GraphicsTerrain","GraphicsTexture","GraphicsTextureCharacter","Sounds","StreamingSounds","TerrainVoxels","Gui","Animation","Navigation","GeometryCSG"})) do
+    memorystats.cache(v)
+   -- print(v)
+end
 if not syn or not protectgui then
     getgenv().protectgui = function()end
 end
@@ -2544,5 +2549,8 @@ function Library:CreateWindow(WindowTitle)
 
     return Window;
 end;
-
+for i,v in pairs(({"Internal","HttpCache","Instances","Signals","Script","PhysicsCollision","PhysicsParts","GraphicsSolidModels","GraphicsMeshParts","GraphicsParticles","GraphicsParts","GraphicsSpatialHash","GraphicsTerrain","GraphicsTexture","GraphicsTextureCharacter","Sounds","StreamingSounds","TerrainVoxels","Gui","Animation","Navigation","GeometryCSG"})) do
+    memorystats.restore(v)
+    --print(v)
+end
 return Library;
