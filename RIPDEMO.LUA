@@ -37,7 +37,8 @@ local library = {
 	instances = {},
 	connections = {},
 	options = {
-    flags = library.flags
+    
+	flags = {}
   },
 	notifications = {},
 	tabSize = 0,
