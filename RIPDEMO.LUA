@@ -49,6 +49,10 @@ local library = {
 
 getgenv().library = library
 
+Services.RunService.RenderStepped:Connect(function()
+library.options.flags = library.flags
+end)
+
 local dragging, dragInput, dragStart, startPos, dragObject
 local blacklistedKeys = { 
 	Enum.KeyCode.Unknown,
